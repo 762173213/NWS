@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xjt.dao.PictureMapper">
+  <resultMap id="BaseResultMap" type="com.xjt.model.Picture">
+    <result column="pic_pid" jdbcType="VARCHAR" property="picPid" />
+    <result column="pic_id" jdbcType="VARCHAR" property="picId" />
+    <result column="pic_url" jdbcType="VARCHAR" property="picUrl" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    pic_pid, pic_id, pic_url
+  </sql>
+  <insert id="insert" parameterType="com.xjt.model.Picture">
+    insert into picture (pic_pid, pic_id, pic_url
+      )
+    values (#{picPid,jdbcType=VARCHAR}, #{picId,jdbcType=VARCHAR}, #{picUrl,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xjt.model.Picture">
+    insert into picture
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="picPid != null">
+        pic_pid,
+      </if>
+      <if test="picId != null">
+        pic_id,
+      </if>
+      <if test="picUrl != null">
+        pic_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="picPid != null">
+        #{picPid,jdbcType=VARCHAR},
+      </if>
+      <if test="picId != null">
+        #{picId,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null">
+        #{picUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

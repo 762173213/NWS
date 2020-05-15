@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xjt.dao.NewstypeMapper">
+  <resultMap id="BaseResultMap" type="com.xjt.model.Newstype">
+    <id column="nt_tid" jdbcType="VARCHAR" property="ntTid" />
+    <result column="nt_name" jdbcType="VARCHAR" property="ntName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    nt_tid, nt_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from newstype
+    where nt_tid = #{ntTid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from newstype
+    where nt_tid = #{ntTid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xjt.model.Newstype">
+    insert into newstype (nt_tid, nt_name)
+    values (#{ntTid,jdbcType=VARCHAR}, #{ntName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xjt.model.Newstype">
+    insert into newstype
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ntTid != null">
+        nt_tid,
+      </if>
+      <if test="ntName != null">
+        nt_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ntTid != null">
+        #{ntTid,jdbcType=VARCHAR},
+      </if>
+      <if test="ntName != null">
+        #{ntName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xjt.model.Newstype">
+    update newstype
+    <set>
+      <if test="ntName != null">
+        nt_name = #{ntName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where nt_tid = #{ntTid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xjt.model.Newstype">
+    update newstype
+    set nt_name = #{ntName,jdbcType=VARCHAR}
+    where nt_tid = #{ntTid,jdbcType=VARCHAR}
+  </update>
+</mapper>

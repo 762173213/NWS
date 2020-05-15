@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xjt.dao.PostnewsMapper">
+  <resultMap id="BaseResultMap" type="com.xjt.model.Postnews">
+    <result column="pn_pnid" jdbcType="VARCHAR" property="pnPnid" />
+    <result column="pn_nid" jdbcType="VARCHAR" property="pnNid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    pn_pnid, pn_nid
+  </sql>
+  <insert id="insert" parameterType="com.xjt.model.Postnews">
+    insert into postnews (pn_pnid, pn_nid)
+    values (#{pnPnid,jdbcType=VARCHAR}, #{pnNid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xjt.model.Postnews">
+    insert into postnews
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pnPnid != null">
+        pn_pnid,
+      </if>
+      <if test="pnNid != null">
+        pn_nid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pnPnid != null">
+        #{pnPnid,jdbcType=VARCHAR},
+      </if>
+      <if test="pnNid != null">
+        #{pnNid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

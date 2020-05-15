@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xjt.dao.UserdataMapper">
+  <resultMap id="BaseResultMap" type="com.xjt.model.Userdata">
+    <id column="ud_uid" jdbcType="VARCHAR" property="udUid" />
+    <result column="ud_username" jdbcType="VARCHAR" property="udUsername" />
+    <result column="ud_password" jdbcType="VARCHAR" property="udPassword" />
+    <result column="ud_nickname" jdbcType="VARCHAR" property="udNickname" />
+    <result column="ud_limit" jdbcType="VARCHAR" property="udLimit" />
+    <result column="ud_rnum" jdbcType="INTEGER" property="udRnum" />
+    <result column="ud_cnid" jdbcType="VARCHAR" property="udCnid" />
+    <result column="ud_sch" jdbcType="VARCHAR" property="udSch" />
+    <result column="ud_pnid" jdbcType="VARCHAR" property="udPnid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ud_uid, ud_username, ud_password, ud_nickname, ud_limit, ud_rnum, ud_cnid, ud_sch, 
+    ud_pnid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from userdata
+    where ud_uid = #{udUid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from userdata
+    where ud_uid = #{udUid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xjt.model.Userdata">
+    insert into userdata (ud_uid, ud_username, ud_password, 
+      ud_nickname, ud_limit, ud_rnum, 
+      ud_cnid, ud_sch, ud_pnid
+      )
+    values (#{udUid,jdbcType=VARCHAR}, #{udUsername,jdbcType=VARCHAR}, #{udPassword,jdbcType=VARCHAR}, 
+      #{udNickname,jdbcType=VARCHAR}, #{udLimit,jdbcType=VARCHAR}, #{udRnum,jdbcType=INTEGER}, 
+      #{udCnid,jdbcType=VARCHAR}, #{udSch,jdbcType=VARCHAR}, #{udPnid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xjt.model.Userdata">
+    insert into userdata
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="udUid != null">
+        ud_uid,
+      </if>
+      <if test="udUsername != null">
+        ud_username,
+      </if>
+      <if test="udPassword != null">
+        ud_password,
+      </if>
+      <if test="udNickname != null">
+        ud_nickname,
+      </if>
+      <if test="udLimit != null">
+        ud_limit,
+      </if>
+      <if test="udRnum != null">
+        ud_rnum,
+      </if>
+      <if test="udCnid != null">
+        ud_cnid,
+      </if>
+      <if test="udSch != null">
+        ud_sch,
+      </if>
+      <if test="udPnid != null">
+        ud_pnid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="udUid != null">
+        #{udUid,jdbcType=VARCHAR},
+      </if>
+      <if test="udUsername != null">
+        #{udUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="udPassword != null">
+        #{udPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="udNickname != null">
+        #{udNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="udLimit != null">
+        #{udLimit,jdbcType=VARCHAR},
+      </if>
+      <if test="udRnum != null">
+        #{udRnum,jdbcType=INTEGER},
+      </if>
+      <if test="udCnid != null">
+        #{udCnid,jdbcType=VARCHAR},
+      </if>
+      <if test="udSch != null">
+        #{udSch,jdbcType=VARCHAR},
+      </if>
+      <if test="udPnid != null">
+        #{udPnid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xjt.model.Userdata">
+    update userdata
+    <set>
+      <if test="udUsername != null">
+        ud_username = #{udUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="udPassword != null">
+        ud_password = #{udPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="udNickname != null">
+        ud_nickname = #{udNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="udLimit != null">
+        ud_limit = #{udLimit,jdbcType=VARCHAR},
+      </if>
+      <if test="udRnum != null">
+        ud_rnum = #{udRnum,jdbcType=INTEGER},
+      </if>
+      <if test="udCnid != null">
+        ud_cnid = #{udCnid,jdbcType=VARCHAR},
+      </if>
+      <if test="udSch != null">
+        ud_sch = #{udSch,jdbcType=VARCHAR},
+      </if>
+      <if test="udPnid != null">
+        ud_pnid = #{udPnid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ud_uid = #{udUid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xjt.model.Userdata">
+    update userdata
+    set ud_username = #{udUsername,jdbcType=VARCHAR},
+      ud_password = #{udPassword,jdbcType=VARCHAR},
+      ud_nickname = #{udNickname,jdbcType=VARCHAR},
+      ud_limit = #{udLimit,jdbcType=VARCHAR},
+      ud_rnum = #{udRnum,jdbcType=INTEGER},
+      ud_cnid = #{udCnid,jdbcType=VARCHAR},
+      ud_sch = #{udSch,jdbcType=VARCHAR},
+      ud_pnid = #{udPnid,jdbcType=VARCHAR}
+    where ud_uid = #{udUid,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select *
+    from userdata
+    where ud_username = #{udUsername,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select *
+    from userdata
+  </select>
+</mapper>

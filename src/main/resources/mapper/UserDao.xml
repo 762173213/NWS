@@ -7,5 +7,11 @@
     <select id="selectUser" resultType="User" parameterType="long">
         SELECT * FROM user WHERE id = #{id}
     </select>
+    <select id="selectAllUsers" resultType="com.xjt.model.User">
+        select * from user;
+    </select>
+    <select id="checkLogin" resultType="com.xjt.model.User" parameterType="string">
+        select * from user where email = #{email}
+    </select>
 
 </mapper>

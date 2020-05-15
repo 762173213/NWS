@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xjt.dao.NewsdataMapper">
+  <resultMap id="BaseResultMap" type="com.xjt.model.Newsdata">
+    <id column="nd_nid" jdbcType="VARCHAR" property="ndNid" />
+    <result column="nd_tid" jdbcType="VARCHAR" property="ndTid" />
+    <result column="nd_title" jdbcType="VARCHAR" property="ndTitle" />
+    <result column="nd_uid" jdbcType="VARCHAR" property="ndUid" />
+    <result column="nd_pid" jdbcType="VARCHAR" property="ndPid" />
+    <result column="nd_date" jdbcType="DATE" property="ndDate" />
+    <result column="nd_cnum" jdbcType="INTEGER" property="ndCnum" />
+    <result column="nd_coid" jdbcType="VARCHAR" property="ndCoid" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.xjt.model.Newsdata">
+    <result column="nd_content" jdbcType="LONGVARCHAR" property="ndContent" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    nd_nid, nd_tid, nd_title, nd_uid, nd_pid, nd_date, nd_cnum, nd_coid
+  </sql>
+  <sql id="Blob_Column_List">
+    nd_content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select *
+    from newsdata
+    where nd_nid = #{ndNid}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from newsdata
+    where nd_nid = #{ndNid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xjt.model.Newsdata">
+    insert into newsdata (nd_nid, nd_tid, nd_title, 
+      nd_uid, nd_pid, nd_date, 
+      nd_cnum, nd_coid, nd_content
+      )
+    values (#{ndNid,jdbcType=VARCHAR}, #{ndTid,jdbcType=VARCHAR}, #{ndTitle,jdbcType=VARCHAR}, 
+      #{ndUid,jdbcType=VARCHAR}, #{ndPid,jdbcType=VARCHAR}, #{ndDate,jdbcType=DATE}, 
+      #{ndCnum,jdbcType=INTEGER}, #{ndCoid,jdbcType=VARCHAR}, #{ndContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xjt.model.Newsdata">
+    insert into newsdata
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ndNid != null">
+        nd_nid,
+      </if>
+      <if test="ndTid != null">
+        nd_tid,
+      </if>
+      <if test="ndTitle != null">
+        nd_title,
+      </if>
+      <if test="ndUid != null">
+        nd_uid,
+      </if>
+      <if test="ndPid != null">
+        nd_pid,
+      </if>
+      <if test="ndDate != null">
+        nd_date,
+      </if>
+      <if test="ndCnum != null">
+        nd_cnum,
+      </if>
+      <if test="ndCoid != null">
+        nd_coid,
+      </if>
+      <if test="ndContent != null">
+        nd_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ndNid != null">
+        #{ndNid,jdbcType=VARCHAR},
+      </if>
+      <if test="ndTid != null">
+        #{ndTid,jdbcType=VARCHAR},
+      </if>
+      <if test="ndTitle != null">
+        #{ndTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="ndUid != null">
+        #{ndUid,jdbcType=VARCHAR},
+      </if>
+      <if test="ndPid != null">
+        #{ndPid,jdbcType=VARCHAR},
+      </if>
+      <if test="ndDate != null">
+        #{ndDate,jdbcType=DATE},
+      </if>
+      <if test="ndCnum != null">
+        #{ndCnum,jdbcType=INTEGER},
+      </if>
+      <if test="ndCoid != null">
+        #{ndCoid,jdbcType=VARCHAR},
+      </if>
+      <if test="ndContent != null">
+        #{ndContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xjt.model.Newsdata">
+    update newsdata
+    <set>
+      <if test="ndTid != null">
+        nd_tid = #{ndTid,jdbcType=VARCHAR},
+      </if>
+      <if test="ndTitle != null">
+        nd_title = #{ndTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="ndUid != null">
+        nd_uid = #{ndUid,jdbcType=VARCHAR},
+      </if>
+      <if test="ndPid != null">
+        nd_pid = #{ndPid,jdbcType=VARCHAR},
+      </if>
+      <if test="ndDate != null">
+        nd_date = #{ndDate,jdbcType=DATE},
+      </if>
+      <if test="ndCnum != null">
+        nd_cnum = #{ndCnum,jdbcType=INTEGER},
+      </if>
+      <if test="ndCoid != null">
+        nd_coid = #{ndCoid,jdbcType=VARCHAR},
+      </if>
+      <if test="ndContent != null">
+        nd_content = #{ndContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where nd_nid = #{ndNid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.xjt.model.Newsdata">
+    update newsdata
+    set nd_tid = #{ndTid,jdbcType=VARCHAR},
+      nd_title = #{ndTitle,jdbcType=VARCHAR},
+      nd_uid = #{ndUid,jdbcType=VARCHAR},
+      nd_pid = #{ndPid,jdbcType=VARCHAR},
+      nd_date = #{ndDate,jdbcType=DATE},
+      nd_cnum = #{ndCnum,jdbcType=INTEGER},
+      nd_coid = #{ndCoid,jdbcType=VARCHAR},
+      nd_content = #{ndContent,jdbcType=LONGVARCHAR}
+    where nd_nid = #{ndNid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xjt.model.Newsdata">
+    update newsdata
+    set nd_tid = #{ndTid,jdbcType=VARCHAR},
+      nd_title = #{ndTitle,jdbcType=VARCHAR},
+      nd_uid = #{ndUid,jdbcType=VARCHAR},
+      nd_pid = #{ndPid,jdbcType=VARCHAR},
+      nd_date = #{ndDate,jdbcType=DATE},
+      nd_cnum = #{ndCnum,jdbcType=INTEGER},
+      nd_coid = #{ndCoid,jdbcType=VARCHAR}
+    where nd_nid = #{ndNid,jdbcType=VARCHAR}
+  </update>
+</mapper>
